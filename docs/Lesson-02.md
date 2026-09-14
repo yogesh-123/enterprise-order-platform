@@ -31,7 +31,7 @@ The goals were:
 
 Initially, the application ran directly on the developer machine.
 
-```text
+
 Developer Machine
 │
 ├── Spring Boot Order Service
@@ -44,7 +44,6 @@ Developer Machine
 └── Docker Desktop Kubernetes
         │
         └── Istio
-```
 
 The Spring Boot application was started using Maven:
 
@@ -56,10 +55,10 @@ The application initially failed because Spring Boot had a PostgreSQL dependency
 
 The error was:
 
-```text
+
 Failed to configure a DataSource:
 'url' attribute is not specified
-```
+
 
 This demonstrated that adding the PostgreSQL JDBC dependency alone is not enough. Spring Boot also needs the datasource connection details.
 
@@ -71,15 +70,14 @@ Instead of installing PostgreSQL directly on Windows, PostgreSQL was run using D
 
 The infrastructure location is:
 
-```text
+
 infrastructure/
 └── local/
     └── docker-compose.yml
-```
 
 The Docker Compose configuration is:
 
-```yaml
+
 services:
 
   postgres:
@@ -105,7 +103,7 @@ services:
 
 volumes:
   postgres_data:
-```
+
 
 ---
 
@@ -113,15 +111,14 @@ volumes:
 
 From:
 
-```text
 infrastructure/local
-```
+
 
 we started PostgreSQL using:
 
 ```powershell
 docker compose up -d
-```
+
 
 Verification:
 
@@ -131,7 +128,7 @@ docker ps
 
 The PostgreSQL container reported:
 
-```text
+text
 enterprise-order-postgres
 postgres:17-alpine
 Up (healthy)
@@ -1020,3 +1017,18 @@ Container-to-container communication
 The application container is currently running successfully.
 
 **One final verification remains:** test the application endpoint through `localhost:8080` and confirm the Actuator health response. After that, Lesson 2 can be committed and we can begin **Lesson 3: Kubernetes Deployment of Order Service**.
+
+
+
+                    Docker Network
+                         │
+                         ▼
+┌──────────────────┐           ┌──────────────────┐
+│  Order Service   │ ─────────►│   PostgreSQL     │
+│  Container       │           │   Container      │
+│  :8080           │           │   :5432          │
+└────────┬─────────┘           └──────────────────┘
+│
+│ HTTP
+▼
+localhost:8080
