@@ -1,0 +1,10 @@
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+
+metadata:
+  name: order-mtls
+  namespace: order-dev
+
+spec:
+  mtls:
+    mode: STRICT

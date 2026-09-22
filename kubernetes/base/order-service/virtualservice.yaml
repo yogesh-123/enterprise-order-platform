@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: order-service
+  namespace: order-dev
+
+spec:
+  hosts:
+    - "order.local"
+
+  gateways:
+    - order-gateway
+
+  http:
+    - timeout: 2s
+
+      retries:
+        attempts: 2
+        perTryTimeout: 1s
+        retryOn: 5xx,connect-failure,reset,refused-stream
+
+      route:
+        - destination:
+            host: order-service
+            port:
+              number: 8080
