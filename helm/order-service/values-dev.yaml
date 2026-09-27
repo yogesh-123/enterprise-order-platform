@@ -1,0 +1,11 @@
+replicaCount: 1
+
+image:
+  tag: "0.1.6"
+
+database:
+  url: jdbc:postgresql://host.docker.internal:5432/orderdb
+
+app:
+  environment: dev
+  orderTimeoutSeconds: 30

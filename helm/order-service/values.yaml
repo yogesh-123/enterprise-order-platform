@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: order-service
+  tag: "0.1.5"
+  pullPolicy: IfNotPresent
+
+database:
+  url: jdbc:postgresql://host.docker.internal:5432/orderdb
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
