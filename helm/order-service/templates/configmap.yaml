@@ -1,3 +1,5 @@
+{{- if .Values.config.enabled }}
+
 apiVersion: v1
 kind: ConfigMap
 
@@ -5,5 +7,7 @@ metadata:
   name: order-service-config
 
 data:
-  APP_ENVIRONMENT: {{ .Values.app.environment | quote }}
-  ORDER_TIMEOUT_SECONDS: {{ .Values.app.orderTimeoutSeconds | quote }}
+  APP_ENVIRONMENT: {{ .Values.config.environment | quote }}
+  ORDER_TIMEOUT_SECONDS: {{ .Values.config.orderTimeoutSeconds | default "30" | quote }}
+
+{{- end }}

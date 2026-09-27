@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: order-service
+  name: {{ include "order-service.fullname" . }}
   labels:
-    app: order-service
+    {{- include "order-service.labels" . | nindent 4 }}
 
 spec:
   replicas: {{ .Values.replicaCount }}

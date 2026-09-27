@@ -9,3 +9,8 @@ database:
 app:
   environment: dev
   orderTimeoutSeconds: 30
+
+config:
+  enabled: true
+  environment: "dev"
+  orderTimeoutSeconds: "30"

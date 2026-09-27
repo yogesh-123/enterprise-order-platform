@@ -12,6 +12,11 @@ service:
   type: ClusterIP
   port: 8080
 
+config:
+  enabled: true
+  environment: "dev"
+  orderTimeoutSeconds: "30"
+
 resources:
   requests:
     cpu: 100m
